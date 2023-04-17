@@ -28,7 +28,7 @@ class NewWikiApplicationTests {
 	@Test
 	@Rollback(false)
 	public void testCreate () {
-		Wiki wiki = new Wiki(null, "brain", "abc", "xyz");
+		Wiki wiki = new Wiki(null, "sample", "abc", "xyz");
 		Wiki savedWiki = wikiRepo.save(wiki);
 		assertNotNull(savedWiki);
 	}
@@ -42,7 +42,7 @@ class NewWikiApplicationTests {
 		
 	@Test
 	public void testFindWikiByTopicExist () {
-		String topic = "abc";
+		String topic = "sample";
 		Wiki wiki = wikiRepo.findByTopic(topic);
 		assertThat(wiki.getTopic()).isEqualTo(topic);
 	}
@@ -61,16 +61,16 @@ class NewWikiApplicationTests {
 
 	@Test
 	public void testUpdate() {
-		Wiki wiki = wikiRepo.findById(502L).get();
+		Wiki wiki = wikiRepo.findById(652L).get();
 		wiki.setTopic("new topic");
 		wikiRepo.save(wiki);
-		assertNotEquals("existing topic", wikiRepo.findById(502L).get().getTopic());
+		assertNotEquals("xyz", wikiRepo.findById(652L).get().getTopic());
 	}
 		
 	@Test
 	public void testDelete () {
-		wikiRepo.deleteById(1L);
-		assertThat(wikiRepo.existsById(1L)).isFalse();
+		wikiRepo.deleteById(602L);
+		assertThat(wikiRepo.existsById(602L)).isFalse();
 	}
 }
 	
