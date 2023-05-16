@@ -1,54 +1,63 @@
 package com.example.newWiki.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.example.newWiki.topic.model.Topic;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import lombok.Data;
 
 @Entity
+@Data
+
 public class Wiki {
 
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-    private String topic;
+    private Long wikiId;
     private String title;
     private String content;
 
+    @ManyToMany
+	@JoinTable(name = "wiki_topic",
+			joinColumns = @JoinColumn(name = "wiki_id"),
+			inverseJoinColumns = @JoinColumn(name = "topic_id")
+	)
+	private Set<Topic> assignedTopics = new HashSet<>();
+
+   
     public Wiki() {
-    	super();
 		
 	}
 
-
-	public Wiki(Long id, String topic, String title, String content) {
+   
+	public Wiki(Long wikiId, String title, String content, Set<Topic> assignedTopics) {
 		super();
-		this.id = id;
-		this.topic = topic;
+		this.wikiId = wikiId;
 		this.title = title;
 		this.content = content;
-	}
-
-	
-
-	public Long getId() {
-		return id;
+		this.assignedTopics = assignedTopics;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+
+	public Long getWikiId() {
+		return wikiId;
 	}
 
 
-	public String getTopic() {
-		return topic;
+
+	public void setWikiId(Long wikiId) {
+		this.wikiId = wikiId;
 	}
 
-
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
 
 
 	public String getTitle() {
@@ -56,9 +65,11 @@ public class Wiki {
 	}
 
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 
 
 	public String getContent() {
@@ -66,18 +77,28 @@ public class Wiki {
 	}
 
 
+
 	public void setContent(String content) {
 		this.content = content;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Wiki [id=" + id + ", topic=" + topic + ", title=" + title + ", content=" + content + "]";
+	public Set<Topic> getAssignedTopics() {
+		return assignedTopics;
+	}
+
+
+	public void setAssignedTopics(Set<Topic> assignedTopics) {
+		this.assignedTopics = assignedTopics;
 	}
 
 
 	
+
 	
+
+
 	
-}
+		
+	}
+
