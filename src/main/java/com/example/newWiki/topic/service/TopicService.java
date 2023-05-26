@@ -22,7 +22,7 @@ public class TopicService {
 		topicRepo.save(topicObj);
 	}
 	
-	public List<Topic> getTopicDetails(Long topicId){
+	public List<Topic> getTopicName(Long topicId){
 		if (null != topicId) {
 			return topicRepo.findAllByTopicId(topicId);
 		} else {
