@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import com.example.newWiki.model.Wiki;
 import com.example.newWiki.topic.model.Topic;
 import com.example.newWiki.topic.repository.TopicRepo;
 
@@ -17,6 +18,8 @@ public class TopicService {
 	
 	@Autowired
 	private TopicRepo topicRepo;
+	
+
 	
 	public void saveTopic(Topic topicObj) {
 		topicRepo.save(topicObj);
@@ -47,5 +50,7 @@ public class TopicService {
 	}
 		return null;
 	}
+
+	
 
 }
